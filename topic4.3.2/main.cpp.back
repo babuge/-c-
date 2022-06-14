@@ -1,0 +1,36 @@
+#include <string>
+#include <iostream>
+#include <tuple>
+
+// c++17
+auto get_student(int id) 
+{
+	// 返回类型被推断为 std::tuple<double, char, std::string>
+	if(id == 0)
+		return std::make_tuple(3.8, 'A', "张三");
+	if (id == 1)
+		return std::make_tuple(2.9, 'C', "李四");
+	if(id == 2)
+		return std::make_tuple(1.7, 'D', "王五" );
+	return std::make_tuple( 0.0, 'D', "null");
+}
+
+// 遍历元组
+template <typename T>
+auto tuple_len(T &tpl) {
+        return std::tuple_size<T>::value;
+}
+
+
+int main() {
+	std::tuple<std::string, double, double, int> t("123", 4.5, 4.6, 8);
+	// 合并元组  c++14
+	auto new_tuple = std::tuple_cat(get_student(1), std::move(t));
+		
+	// 迭代
+	for( int i = 0; i!=tuple_len(new_tuple); ++i) 
+		// 运行期间索引
+		std::cout << tuple_index(i,new_tuple) << std::endl;
+
+	return 0;
+}
