@@ -10,8 +10,8 @@ TARGET = main
 LDFLAGS_COMMON = -std=c++2a -lpthread -latomic
         
 all:    
-	# $(C) -c $(SOURCE_C)
 	$(CXX) $(SOURCE_CXX) $(LDFLAGS_COMMON)  -o $(TARGET)
- 
+
+.PHONY:clean
 clean:
-	rm -rf *.o $(TARGET)
+	-rm -vrf *.o $(TARGET)
